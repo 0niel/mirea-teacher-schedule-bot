@@ -98,7 +98,7 @@ def get_day(update: Update, context: CallbackContext):
     new_year = datetime.datetime(2020, 12, 31)
     love_day = datetime.datetime(2020, 2, 14)
     delta = datetime.timedelta(days=365)
-    today = datetime.datetime.today()
+    today = datetime.datetime.now()
     # new year handler
     if abs((today - new_year) % delta).days <= 20 or abs((today - new_year) % delta).days >= 345:
 
@@ -227,9 +227,7 @@ def parse(teacher_schedule, weekday, week_number):
         filter(lambda x: int(week_number) in x["lesson"]["weeks"], teacher_schedule)
     )
     teacher_schedule = sorted(teacher_schedule, key=lambda x: x["lesson"]["time_start"])
-    teacher_schedule = sorted(teacher_schedule, key=lambda x: x["lesson"]["time_end"])
-
-    return teacher_schedule
+    return sorted(teacher_schedule, key=lambda x: x["lesson"]["time_end"])
 
 
 def remove_duplicates_merge_groups_with_same_lesson(teacher_schedule):
